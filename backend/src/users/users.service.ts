@@ -15,7 +15,7 @@ export class UsersService {
 
     //obtener los datos de la tabla users que hice
     const { data: dataUser, error: errorUser } = await supabase
-      .from('user')
+      .from('users')
       .select('*')
       .eq('id', data.user.id)
       .single();
@@ -31,8 +31,8 @@ export class UsersService {
       ...data,
       user: {
         ...data.user,
-        // Priorizar datos de user_status sobre user_metadata
-        name: dataUser?.user_name || data.user.user_metadata?.name || '',
+        // Priorizar datos de users sobre user_metadata
+        name: dataUser?.name || data.user.user_metadata?.name || '',
         phone: dataUser?.phone || data.user.user_metadata?.phone || '',
         role: dataUser?.role || data.user.user_metadata?.role || '',
       },
@@ -47,8 +47,8 @@ export class UsersService {
     console.log('[UPDATE PORFILE],updateData:', JSON.stringify(updateUser));
 
     const { data, error } = await supabase
-      .from('user')
-      .upsert(updateUser, { onConflict: 'id' })
+      .from('users')
+      .upsert({ id: userId, ...updateUser }, { onConflict: 'id' })
       .select()
       .single();
     if (error) {
