@@ -24,7 +24,7 @@ export class AuthService {
     const userId = data.user?.id;
     if (userId) {
       const { error: insertError } = await supabase.from('users').insert({
-        id: userId,
+        user_id: userId,
         role: userDto.role,
         name: userDto.name,
         phone: userDto.phone,

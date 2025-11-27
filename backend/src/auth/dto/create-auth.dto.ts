@@ -15,9 +15,8 @@ export class AuthDto{
     @MinLength(6,{message:'Password is too short'})
     password: string;
 
-    
-    @IsIn(['admin','cliente'])
-    role?:'admin'|'cliente';
+    @IsIn(['admin','coordinador','profesor','chofer'])
+    role?:'admin'|'coordinador'|'profesor'|'chofer';
 
     
 

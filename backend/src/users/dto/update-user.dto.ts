@@ -10,8 +10,6 @@ export class UpdateUserDto{
     phone?:string;
 
     @IsOptional()
-    @IsString()
-    @IsIn(['professor','driver'])
-    role?:string;
-
+    @IsIn(['admin','coordinador','profesor','chofer'])
+    role?:'admin'|'coordinador'|'profesor'|'chofer';
 }
