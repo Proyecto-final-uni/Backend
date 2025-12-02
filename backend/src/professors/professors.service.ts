@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { createSupabaseClientForToken } from '../config/supabase.client';
 import { ProfessorsDto} from './dto/professor.dto';
-import * as jwt from 'jsonwebtoken';
+
 @Injectable()
 export class ProfessorsService {
   //metodo para obtener todos los profesores del problema

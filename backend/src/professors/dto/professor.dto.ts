@@ -4,6 +4,7 @@ import {
   IsIn,
   IsOptional,
   IsPhoneNumber,
+  isString,
   IsString,
   IsUUID,
   MinLength,
@@ -36,5 +37,8 @@ export class ProfessorsDto{
     @IsOptional()
     @IsBoolean()
     is_active?:boolean=true;
+
+    @IsString()
+    subject?:string;
 
 }
