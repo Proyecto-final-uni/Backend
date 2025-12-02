@@ -16,8 +16,8 @@ export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey,{
 
 
 //codigo apra crear clientes por token 
-export function createSupabaseClientForToken(token?: string): SupabaseClient {
-  
+export function createSupabaseClientForToken(authHeader?: string): SupabaseClient {
+  const token=authHeader.split(' ')[1];
   const client = createClient(supabaseUrl, supabaseKey, {
     auth: {
       persistSession: false,
