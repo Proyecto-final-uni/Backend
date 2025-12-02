@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { createSupabaseClientForToken } from '../config/supabase.client';
 import { ProfessorsDto} from './dto/professor.dto';
+import * as jwt from 'jsonwebtoken';
 @Injectable()
 export class ProfessorsService {
   //metodo para obtener todos los profesores del problema
@@ -19,7 +20,7 @@ export class ProfessorsService {
   async getProfessorById(authHeader: string, professorId: string) {
     const sb = createSupabaseClientForToken(authHeader);
     const { data, error } = await sb
-      .from('porfessors')
+      .from('professors')
       .select('*')
       .eq('id', professorId)
       .single();
@@ -32,18 +33,21 @@ export class ProfessorsService {
   }
 
   //metodo para crear un profesor
-  async createProfessor(authHeader: string, userId: string,professorData: ProfessorsDto) {
+  async createProfessor(authHeader: string, userId: string, professorData: ProfessorsDto) {
     const sb = createSupabaseClientForToken(authHeader);
-    const {data,error}=await sb
+
+    const { data, error } = await sb
       .from('professors')
       .insert({
-        user_id: userId,
-        ...professorData})
+        user_id: userId, 
+        ...professorData
+      })
       .select()
       .single();
-      if(error){
-        throw new NotFoundException(`Cant create the professor ,Error: ${error.message}`);
-      }
-      return data;
+      
+    if (error) {
+      throw new NotFoundException(`Cant create the professor, Error: ${error.message}`);
+    }
+    return data;
   }
 }
