@@ -28,7 +28,6 @@ export class ProfessorsController {
   @Post()
   async createProfessor(@Req() req, @Body() professorData: ProfessorsDto) {
     const token = req.headers.authorization?.split(' ')[1];
-    const userId = req.user.id; // Del guard que ya valida el token
-    return this.professorsService.createProfessor(token, userId, professorData);
+    return this.professorsService.createProfessor(token, professorData);
   }
 }

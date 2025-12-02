@@ -5,9 +5,13 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
+  IsUUID,
   MinLength,
 } from 'class-validator';
 export class ProfessorsDto{
+    @IsUUID()
+    user_id: string;
+
     @IsString()
     full_name?:string;
 

@@ -33,15 +33,12 @@ export class ProfessorsService {
   }
 
   //metodo para crear un profesor
-  async createProfessor(authHeader: string, userId: string, professorData: ProfessorsDto) {
+  async createProfessor(authHeader: string, professorData: ProfessorsDto) {
     const sb = createSupabaseClientForToken(authHeader);
 
     const { data, error } = await sb
       .from('professors')
-      .insert({
-        user_id: userId, 
-        ...professorData
-      })
+      .insert(professorData) // Inserta directamente todo el DTO (incluye user_id)
       .select()
       .single();
       
