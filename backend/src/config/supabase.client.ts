@@ -15,9 +15,8 @@ export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey,{
 });
 
 
-//codigo apra crear clientes por token 
-export function createSupabaseClientForToken(authHeader?: string): SupabaseClient {
-  const token=authHeader.split(' ')[1];
+//codigo para crear clientes por token 
+export function createSupabaseClientForToken(token?: string): SupabaseClient {
   const client = createClient(supabaseUrl, supabaseKey, {
     auth: {
       persistSession: false,
@@ -25,13 +24,11 @@ export function createSupabaseClientForToken(authHeader?: string): SupabaseClien
       detectSessionInUrl: false,
     },
     global: {
-      headers:token ? {
+      headers: token ? {
         Authorization: `Bearer ${token}`
-      }:{}
+      } : {}
     }
   });
-  
-  
   
   return client;
 }

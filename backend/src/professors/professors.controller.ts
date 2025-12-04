@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, UseGuards, Req } from '@nestjs/comm
 import { ProfessorsService } from './professors.service';
 import { ProfessorsDto } from './dto/professor.dto';
 import { ProfessorsGuard } from './professors.guard';
+import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('professors')
 export class ProfessorsController {
@@ -23,11 +24,11 @@ export class ProfessorsController {
     return this.professorsService.getProfessorById(token, id);
   }
 
-  // Crear un nuevo profesor
-  @UseGuards(ProfessorsGuard)
+  // Crear un nuevo profesor (solo admin)
+  @UseGuards(AdminGuard)
   @Post()
   async createProfessor(@Req() req, @Body() professorData: ProfessorsDto) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.token;
     return this.professorsService.createProfessor(token, professorData);
   }
 }
