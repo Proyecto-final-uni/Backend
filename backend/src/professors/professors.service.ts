@@ -22,7 +22,7 @@ export class ProfessorsService {
     const { data, error } = await sb
       .from('professors')
       .select('*')
-      .eq('id', professorId)
+      .eq('user_id', professorId)
       .single();
     if (error) {
       throw new NotFoundException(
