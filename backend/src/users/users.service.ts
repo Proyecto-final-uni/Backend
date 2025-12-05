@@ -73,4 +73,15 @@ export class UsersService {
     }
     return data;
   }
+  //obtener todos los usuarios 
+  async getAllUsers(){
+    const {data,error}=await supabase
+      .from('users')
+      .select('*');
+    if (error) {
+      console.log(`error al obtener todos los usuarios, error: ${error}`);
+      throw new NotFoundException(error.message);
+    }
+    return data;
+  }
 }

@@ -12,7 +12,7 @@ export class ProfessorsController {
   @UseGuards(ProfessorsGuard)
   @Get()
   async listProfessors(@Req() req) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.token;
     return this.professorsService.listPorfessors(token);
   }
 
@@ -20,7 +20,7 @@ export class ProfessorsController {
   @UseGuards(ProfessorsGuard)
   @Get(':id')
   async getProfessorById(@Req() req, @Param('id') id: string) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.token;
     return this.professorsService.getProfessorById(token, id);
   }
 

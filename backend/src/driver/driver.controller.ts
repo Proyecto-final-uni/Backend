@@ -28,7 +28,7 @@ export class DriverController {
   @UseGuards(DriversGuard)
   @Get()
   async getDriverList(@Req() req) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.token;
     return this.driverService.getDriverList(token);
   }
 
@@ -36,7 +36,7 @@ export class DriverController {
   @UseGuards(DriversGuard)
   @Get(':id')
   async getDriverById(@Req() req, @Param('id') driverId: string) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.token;
     return this.driverService.getDriverById(token, driverId);
   }
 
@@ -48,7 +48,7 @@ export class DriverController {
     @Param('id') driverId: string,
     @Body() driverData: UpdateDriverDto,
   ) {
-    const token=req.headers.authorization.split(' ')[1];
+    const token = req.token;
     return this.driverService.updateDrivers(token, driverId, driverData);
   }
 }

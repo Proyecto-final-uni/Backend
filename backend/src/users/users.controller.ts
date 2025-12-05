@@ -37,5 +37,11 @@ export class UsersController {
     console.log(['GET /users/:id] iniciado con ID:', id]);
     return this.usersService.getUserById(id);
   }
+  //obtener todos los usuarios
+  @UseGuards(UserGuards)
+  @Get()
+  async getAllUsers(){
+    return this.usersService.getAllUsers();
+  }
   
 }

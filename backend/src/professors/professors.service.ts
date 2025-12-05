@@ -6,8 +6,8 @@ import { ProfessorsDto} from './dto/professor.dto';
 export class ProfessorsService {
   //metodo para obtener todos los profesores del problema
 
-  async listPorfessors(authHeader: string) {
-    const sb = createSupabaseClientForToken(authHeader);
+  async listPorfessors(token: string) {
+    const sb = createSupabaseClientForToken(token);
 
     const { data, error } = await sb.from('professors').select('*');
     if (error) {
@@ -17,8 +17,8 @@ export class ProfessorsService {
   }
 
   //metodo para obtener porfesores por un id
-  async getProfessorById(authHeader: string, professorId: string) {
-    const sb = createSupabaseClientForToken(authHeader);
+  async getProfessorById(token: string, professorId: string) {
+    const sb = createSupabaseClientForToken(token);
     const { data, error } = await sb
       .from('professors')
       .select('*')
@@ -33,8 +33,8 @@ export class ProfessorsService {
   }
 
   //metodo para crear un profesor
-  async createProfessor(authHeader: string, professorData: ProfessorsDto) {
-    const sb = createSupabaseClientForToken(authHeader);
+  async createProfessor(token: string, professorData: ProfessorsDto) {
+    const sb = createSupabaseClientForToken(token);
 
     const { data, error } = await sb
       .from('professors')

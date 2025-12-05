@@ -5,8 +5,8 @@ import { DriversDto, UpdateDriverDto } from './dto/drivers.dto';
 @Injectable()
 export class DriverService {
   //crear un chofer
-  async createDriver(authHeader: string, driverData: DriversDto) {
-    const sb = createSupabaseClientForToken(authHeader);
+  async createDriver(token: string, driverData: DriversDto) {
+    const sb = createSupabaseClientForToken(token);
     const { data, error } = await sb
       .from('drivers')
       .insert(driverData)
@@ -19,8 +19,8 @@ export class DriverService {
   }
 
   //update drivers
-  async updateDrivers(authHeader: string,id:string, driverUpdateData: UpdateDriverDto) {
-    const sb = createSupabaseClientForToken(authHeader);
+  async updateDrivers(token: string, id: string, driverUpdateData: UpdateDriverDto) {
+    const sb = createSupabaseClientForToken(token);
     const { data, error } = await sb
       .from('drivers')
       .update(driverUpdateData)
@@ -34,8 +34,8 @@ export class DriverService {
   }
 
   //obtener chofer by id
-  async getDriverById(authHeader: string, driverId: string) {
-    const sb = createSupabaseClientForToken(authHeader);
+  async getDriverById(token: string, driverId: string) {
+    const sb = createSupabaseClientForToken(token);
     const { data: dataDriver, error: errorDataDriver } = await sb
       .from('drivers')
       .select('*')
@@ -50,8 +50,8 @@ export class DriverService {
   }
 
   //obtener listado de choferes
-  async getDriverList(authHeader: string) {
-    const sb = await createSupabaseClientForToken(authHeader);
+  async getDriverList(token: string) {
+    const sb = createSupabaseClientForToken(token);
     const { data: driverList, error: errorDriverList } = await sb
       .from('drivers')
       .select('*');

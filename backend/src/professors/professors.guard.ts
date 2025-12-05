@@ -60,6 +60,8 @@ export class ProfessorsGuard implements CanActivate {
             role: payload.user_metadata?.role || payload.role || 'cliente',
         };
         
+        request.token = token;
+        
         console.log('🔑 [ProfessorsGuard] Usuario asignado:', request.user);
         console.log('🔑 [ProfessorsGuard] ✅ Validación exitosa');
         
