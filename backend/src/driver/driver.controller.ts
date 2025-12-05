@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { DriverService } from './driver.service';
 import { DriversGuard } from './drivers.guard';
-import { DriversDto } from './dto/drivers.dto';
+import { DriversDto, UpdateDriverDto } from './dto/drivers.dto';
 import { AdminGuard } from '../auth/admin.guard';
 @Controller('driver')
 export class DriverController {
@@ -46,9 +46,9 @@ export class DriverController {
   async updateDriver(
     @Req() req,
     @Param('id') driverId: string,
-    @Body() riverData: DriversDto,
+    @Body() driverData: UpdateDriverDto,
   ) {
     const token=req.headers.authorization.split(' ')[1];
-    return this.driverService.updateDrivers(token, driverId, riverData);
+    return this.driverService.updateDrivers(token, driverId, driverData);
   }
 }

@@ -62,4 +62,18 @@ export class DriverService {
     }
     return driverList;
   }
+  //eliminar driver
+  async deleteDriver(token: string, driverId: string){
+    const sb = createSupabaseClientForToken(token);
+    const{data,error}=await sb
+      .from('drivers')
+      .delete()
+      .eq('user_id',driverId)
+      .select()
+      .single();
+    if(error){
+      throw new NotFoundException(`Cant delete the driver, Error: ${error.message}`);
+    }
+    return data;
+  }
 }

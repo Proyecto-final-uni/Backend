@@ -1,4 +1,4 @@
-import { IsDate, IsString, IsUUID, IsOptional } from 'class-validator';
+import {  IsString, IsUUID, IsOptional } from 'class-validator';
 
 export class DriversDto {
   @IsUUID()
@@ -19,8 +19,8 @@ export class DriversDto {
   @IsString()
   phone?: string;
 
-  @IsDate()
-  license_expiry?: Date;
+  @IsString()
+  license_expiry?: string;
 }
 
 export class UpdateDriverDto {
@@ -34,6 +34,6 @@ export class UpdateDriverDto {
 
   @IsOptional()
   @IsString()
-  @IsDate()
-  license_expiry?: Date;
+  license_expiry?: string;
+  
 }
