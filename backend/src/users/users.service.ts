@@ -17,7 +17,7 @@ export class UsersService {
     const { data: dataUser, error: errorUser } = await supabase
       .from('users')
       .select('*')
-      .eq('id', data.user.id)
+      .eq('user_id', data.user.id)
       .single();
     if (errorUser) {
       console.log('Error al obtener de la tabla user');
@@ -48,7 +48,7 @@ export class UsersService {
 
     const { data, error } = await supabase
       .from('users')
-      .upsert({ id: userId, ...updateUser }, { onConflict: 'id' })
+      .upsert({ user_id: userId, ...updateUser }, { onConflict: 'user_id' })
       .select()
       .single();
     if (error) {
@@ -65,7 +65,7 @@ export class UsersService {
     const { data, error } = await supabase
       .from('users')
       .select('*')
-      .eq('id', userId)
+      .eq('user_id', userId)
       .single();
     if (error) {
       console.log(`error al enconytrar usuario, error: ${error}`);

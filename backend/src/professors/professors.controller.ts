@@ -19,9 +19,9 @@ export class ProfessorsController {
   // Obtener profesor por ID
   @UseGuards(ProfessorsGuard)
   @Get(':id')
-  async getProfessorById(@Req() req, @Param('id') id: string) {
+  async getProfessorById(@Req() req, @Param('id') professorId: string) {
     const token = req.token;
-    return this.professorsService.getProfessorById(token, id);
+    return this.professorsService.getProfessorById(token, professorId);
   }
 
   // Crear un nuevo profesor (solo admin)
