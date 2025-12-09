@@ -4,9 +4,10 @@ import { UsersModule } from './users/users.module';
 import { ProfessorsModule } from './professors/professors.module';
 import { DriverModule } from './driver/driver.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { DestinationsModule } from './destinations/destinations.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, ProfessorsModule, DriverModule, VehiclesModule],
+  imports: [AuthModule, UsersModule, ProfessorsModule, DriverModule, VehiclesModule, DestinationsModule],
   controllers: [],
   providers: [],
 })
