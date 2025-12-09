@@ -1,11 +1,10 @@
-import{ IsInt, IsString } from 'class-validator'; 
-export class DestinationDto{
+import { IsInt, IsString } from 'class-validator'; 
+
+export class DestinationDto {
     
     @IsString()
-    province?: string;
+    province: string;
 
     @IsInt()
-    order_index?: number;
-
-    
+    order_index: number;
 }
