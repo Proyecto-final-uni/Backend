@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class TariffsDto{
     @IsNumber()
@@ -9,6 +9,7 @@ export class TariffsDto{
 } 
 
 export class UpdateTariffDto{
+    @IsOptional()
     @IsNumber()
     base_fare?: number;
 }

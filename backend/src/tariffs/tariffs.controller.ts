@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Req, UseGuards, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Req, UseGuards, Body, Param } from '@nestjs/common';
 import { TariffsService } from './tariffs.service';
 import { TariffsDto, UpdateTariffDto } from './dto/tariff.dto';
 import { TariffsGuard } from './tariffs.guard';
@@ -17,6 +17,7 @@ export class TariffsController {
 
   //crear una tarifa 
   @UseGuards(AdminGuard)
+  @Post()
   async createTariff(@Req() req, tariffData: TariffsDto){
     const token=req.token;
     return this.tariffsService.createTariff(token, tariffData);

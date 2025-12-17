@@ -4,12 +4,12 @@ import { TariffsDto, UpdateTariffDto } from './dto/tariff.dto';
 
 @Injectable()
 export class TariffsService {
-  //obtenr tarrifs
+  //obtener todas las tarifas
   async getTariffs(token: string) {
     const sb = createSupabaseClientForToken(token);
-    const { data, error } = await sb.from('tariffs').select('*').single();
+    const { data, error } = await sb.from('tariffs').select('*');
     if (error) {
-      throw new NotFoundException('Tariffs not found');
+      throw new NotFoundException(`Can't get tariffs: ${error.message}`);
     }
     return data;
   }
@@ -19,10 +19,11 @@ export class TariffsService {
     const sb = createSupabaseClientForToken(token);
     const { data, error } = await sb
       .from('tariffs')
-      .insert(tariffData)
+      .insert([tariffData])
+      .select()
       .single();
     if (error) {
-      throw new Error('Error creating tariff');
+      throw new Error(`Can't create tariff: ${error.message}`);
     }
     return data;
   }
@@ -30,7 +31,7 @@ export class TariffsService {
   //update tariff
   async updateTariff(
     token: string,
-    tariffId: any,
+    tariffId: string,
     tariffUpdateData: UpdateTariffDto,
   ) {
     const sb = createSupabaseClientForToken(token);
@@ -38,9 +39,10 @@ export class TariffsService {
       .from('tariffs')
       .update(tariffUpdateData)
       .eq('id', tariffId)
+      .select()
       .single();
     if (error) {
-      throw new NotFoundException(`Tarif with id ${tariffId} not found`);
+      throw new NotFoundException(`Tariff with id ${tariffId} not found: ${error.message}`);
     }
     return data;
   }
